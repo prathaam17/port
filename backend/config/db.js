@@ -4,12 +4,26 @@ require('dotenv').config();
 
 const dialect = process.env.DB_DIALECT || 'postgres';
 
+let sequelize;
+
 if (dialect === 'sqlite') {
   // SQLite configuration if explicitly requested
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: path.join(__dirname, '..', 'port_inventory.db'),
     logging: false
+  });
+} else if (process.env.DATABASE_URL) {
+  // Production PostgreSQL connection string (Render/Neon/Heroku)
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   });
 } else {
   // Default to PostgreSQL
