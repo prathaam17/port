@@ -31,8 +31,9 @@ API.interceptors.response.use(
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       // Only redirect if we aren't already on login page to avoid cycles
-      if (!window.location.pathname.includes('/login')) {
-        window.location.href = '/login?expired=true';
+      if (!window.location.hash.includes('/login') && !window.location.pathname.includes('/login')) {
+        const base = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/';
+        window.location.href = base + '#/login?expired=true';
       }
     }
     return Promise.reject(error);
