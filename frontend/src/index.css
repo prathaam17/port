@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Surface / Cards (Pure White) */
+  --color-white: #FFFFFF;
+  
+  /* Main Background (Pure White) */
+  --color-slate-50: #FFFFFF;
+  --color-slate-100: #F8FAFC;
+  
+  /* Borders (Subtle Slate Gray) */
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #E2E8F0;
+  
+  /* Secondary Text (Cool Gray) */
+  --color-slate-350: #64748B;
+  --color-slate-400: #64748B;
+  --color-slate-450: #64748B;
+  --color-slate-500: #64748B;
+  --color-slate-600: #475569;
+  
+  /* Primary Text & Headings (Deep Ink Navy/Black) */
+  --color-slate-700: #0F172A;
+  --color-slate-800: #0F172A;
+  --color-slate-850: #0F172A;
+  --color-slate-900: #0F172A;
+  --color-slate-950: #020617;
+
+  /* Accent Highlight (Ocean Blue) */
+  --color-sky-400: #38BDF8;
+  --color-sky-500: #0284C7;
+  --color-sky-600: #0284C7;
+  --color-sky-700: #0369A1;
+
+  /* Success (Muted Olive Green) */
+  --color-emerald-400: #6B8E5A;
+  --color-emerald-500: #6B8E5A;
+  --color-emerald-600: #557248;
+
+  /* Warning (Amber) */
+  --color-amber-400: #D98C00;
+  --color-amber-500: #D98C00;
+  --color-amber-600: #bf7c00;
+
+  /* Error (Soft Brick Red) */
+  --color-rose-400: #B85C4B;
+  --color-rose-500: #B85C4B;
+  --color-rose-600: #9c4c3e;
+
+  --font-sans: 'Inter', 'system-ui', 'sans-serif';
+}
+
+@layer base {
+  html {
+    font-size: 17.5px; /* Increases all rem-based font sizes globally by ~9.3% */
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-200 antialiased font-sans;
+  }
+}
+
+/* Minimalistic White Panel Styles */
+.glass-panel {
+  background: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print CSS Configurations */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Hide non-printable elements */
+  .no-print,
+  aside,
+  nav,
+  button,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Make content take full width */
+  .print-container {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Force table formatting */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    color: black !important;
+  }
+}
+
+/* Micro-animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(0.98); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glow effects */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
+}
+
+.dark .glow-blue {
+  box-shadow: 0 0 25px rgba(14, 165, 233, 0.25);
+}
